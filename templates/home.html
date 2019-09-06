@@ -1,14 +1,21 @@
-<h1>Django AllAuth Functions Demo</h1>
-<h2>Home</h2>
 
-{% if user.is_authenticated %}
-    <p>Hi {{ user.username }}</p>
-    <a href="{% url 'account_logout' %}">Log out</a></p>
-{% else %}
-    <p><a href="{% url 'account_signup' %}">Sign Up</a></p>
-    <p><a href="{% url 'account_login' %}">Log In</a></p>
-{% endif %}
+{% extends 'base.html' %}
+{% block content %}
 
+    <h2>Homepage</h2>
+
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.first_name }} {{ user.last_name }}</p>
+        {% for item in extra_data %}
+            <p>name: {{ item.extra_data.name }}</p>
+        {% endfor %}
+    {% else %}
+        <p>I dont know who you are!</p>
+    {% endif %}
+
+
+
+{% endblock content %}
 
 {#{% if user.is_authenticated %}#}
 {#    <p>Hi {{ user.username }}#}

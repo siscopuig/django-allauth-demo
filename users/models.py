@@ -14,11 +14,4 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        # Does inherited from AbstractUser
-        return f"{self.user.first_name} Profile"
-
-
-
-
-# IntegrityError at /accounts/signup/
-# NOT NULL constraint failed: users_profile.user_id
+        return f"{self.user.username} Profile"

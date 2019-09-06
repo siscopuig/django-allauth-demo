@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'webapp.apps.WebappConfig',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
@@ -142,7 +147,12 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 # ConnectionRefusedError at /accounts/signup/
 ACCOUNT_EMAIL_VERIFICATION = 'none' # Disables email verification
+
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# ACCOUNT_ADAPTER = 'users.adapter.NoNewUsersAccountAdapter'
+
+# ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 
 # ACCOUNT_FORMS = {
 #     'signup': 'users.forms.CustomSignupForm',
