@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from allauth.socialaccount.models import SocialAccount
-from allauth.socialaccount.models import JSONField
 from users.models import CustomUser
 
 from django.db import connection
@@ -15,6 +14,6 @@ def home(request):
     # for item in SocialAccount.objects.all():
     #     print(item.extra_data)
 
-    # context = {"extra_data": SocialAccount.objects.values('extra_data')}
+    context = {"extra_data": SocialAccount.objects.values('extra_data')}
 
-    return render(request, 'home.html')
+    return render(request, 'home.html', context=context)

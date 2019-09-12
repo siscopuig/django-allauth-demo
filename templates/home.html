@@ -5,9 +5,11 @@
     <h2>Homepage</h2>
 
     {% if user.is_authenticated %}
-        <p>Welcome, {{ user.first_name }} {{ user.last_name }}</p>
+        <p>Welcome, {{ user.username }}</p>
+        <p>First name: {{ user.first_name }}</p>
+        <p>Last name: {{ user.last_name }}</p>
         {% for item in extra_data %}
-            <p>name: {{ item.extra_data.name }}</p>
+            <p>name: {{ item.extra_data }}</p>
         {% endfor %}
     {% else %}
         <p>I dont know who you are!</p>

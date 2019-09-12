@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 # from .forms import CustomSignupForm
 from .models import CustomUser
+from .models import Profile
 from .forms import CustomUserProfile
 from .forms import CustomUserChangeForm
 from django.contrib import messages
@@ -12,54 +13,39 @@ from allauth.socialaccount.models import SocialAccount
 @login_required()
 def profile(request):
 
-    # if request.method == 'POST':
-    #     update_form = CustomUserChangeForm(request.POST, instance=request.user)
-    #     print(request.POST)
-    #     if update_form.is_valid():
-    #         update_form.save()
-    #         messages.success(request, f"Your account has been updated")
-    #         return redirect('profile')
-    # else:
-    #     update_form = CustomUserChangeForm(request.POST, instance=request.user)
-    #
-    # return render(request, 'profile.html', context={"update_form": update_form})
+    user_model = CustomUser.objects.get(pk=request.user.id)
+    # print(f"User model: {user_model}")
+    user_profile = Profile.objects.get(pk=request.user.id)
+    # print(f"User profile: {user_profile}")
+
+    data_form = {}
+
+    user = CustomUser.objects.get(pk=request.user.id)
+
+    data_form['first_name'] = user.first_name
+    data_form['last_name'] = user.last_name
+
 
     if request.method == 'POST':
-        profile_form = CustomUserProfile(request.POST, instance=request.user.username)
-        print(request.POST)
-        if profile_form.is_valid():
+        update_form = CustomUserChangeForm(request.POST, instance=user_model, initial=data_form)
+        profile_form = CustomUserProfile(request.POST, instance=user_profile)
+
+        if update_form.is_valid() and profile_form.is_valid():
+            update_form.save()
             profile_form.save()
             messages.success(request, f"Your account has been updated")
             return redirect('profile')
+
     else:
-        profile_form = CustomUserProfile(request.POST, instance=request.user.username)
+        update_form = CustomUserChangeForm(request.POST, instance=user_model, initial=data_form)
+        profile_form = CustomUserProfile(request.POST, instance=user_profile)
 
-    return render(request, 'profile.html', context={"update_form": profile_form})
+    context = {
+        'update_form': update_form,
+        'profile_form': profile_form
+    }
 
-    # if request.method == 'POST':
-    #     update_form = CustomUserChangeForm(request.POST)
-    #     profile_form = CustomUserProfile(request.POST)
-    #     # update_form = CustomUserChangeForm(request.POST, instance=request.user)
-    #     # profile_form = CustomUserProfile(request.POST, instance=request.user)
-    #
-    #     if update_form.is_valid() and profile_form.is_valid():
-    #         update_form.save()
-    #         profile_form.save()
-    #         messages.success(request, f"Your account has been updated")
-    #         return redirect('profile')
-    #
-    # else:
-    #     update_form = CustomUserChangeForm(request.POST)
-    #     profile_form = CustomUserProfile(request.POST)
-    #     # update_form = CustomUserChangeForm(request.POST, instance=request.user)
-    #     # profile_form = CustomUserProfile(request.POST, instance=request.user)
-    #
-    # context = {
-    #     'update_form': update_form,
-    #     'profile_form': profile_form
-    # }
-    #
-    # return render(request, 'profile.html', context=context)
+    return render(request, 'profile.html', context=context)
 
 
 # def signup(request):
