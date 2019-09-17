@@ -6,17 +6,14 @@
 
     {% if user.is_authenticated %}
         <p>Welcome, {{ user.username }}</p>
-        <p>First name: {{ user.first_name }}</p>
-        <p>Last name: {{ user.last_name }}</p>
-        {% for item in extra_data %}
-            <p>name: {{ item.extra_data }}</p>
-        {% endfor %}
+{#        <p>First name: {{ user.first_name }}</p>#}
+{#        <p>Last name: {{ user.last_name }}</p>#}
+{#        {% for item in extra_data %}#}
+{#            <p>name: {{ item.extra_data }}</p>#}
+{#        {% endfor %}#}
     {% else %}
         <p>I dont know who you are!</p>
     {% endif %}
-
-
-
 {% endblock content %}
 
 {#{% if user.is_authenticated %}#}

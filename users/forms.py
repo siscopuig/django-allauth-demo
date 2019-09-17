@@ -1,11 +1,10 @@
 from django import forms
 from .models import Profile
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.contrib.auth.forms import User
-from allauth.account.forms import SignupForm, UserForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
-from allauth.account.forms import LoginForm
+from allauth.socialaccount.forms import DisconnectForm
+from django.contrib.auth.forms import User
+from django.contrib.auth import get_user_model
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -29,28 +28,18 @@ class CustomUserProfile(forms.ModelForm):
         fields = ['address', 'phone_number']
 
 
+class CustomSocialDisconnectForm(DisconnectForm):
+
+    def save(self):
+
+        # Add your own processing here if you do need access to the
+        # socialaccount being deleted.
+
+        # Ensure you call the parent class's save.
+        # .save() does not return anything
+        super(CustomSocialDisconnectForm, self).save()
+
+        # Add your own processing here if you don't need access to the
+        # socialaccount being deleted.
 
 
-
-
-# class CustomSignupForm(forms.ModelForm):
-#
-#     first_name = forms.CharField(max_length=30, label='First Name')
-#     last_name = forms.CharField(max_length=30, label='Last Name')
-#
-#     class Meta:
-#         model = Profile
-#         fields = ['first_name', 'last_name', 'address', 'phone_number']
-#
-#     def signup(self, request, user):
-#         user.first_name = self.cleaned_data['first_name']
-#         user.last_name = self.cleaned_data['last_name']
-#         user.save()
-#
-#         user.profile.address = self.cleaned_data['address']
-#         user.profile.phone_number = self.cleaned_data['phone_number']
-#         user.profile.save()
-
-
-# address = forms.CharField(max_length=30, label='Address')
-# phone_number = forms.CharField(max_length=30, label='Phone Number')

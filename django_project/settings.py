@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -93,7 +92,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -133,6 +131,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
@@ -145,17 +148,16 @@ SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
-# ConnectionRefusedError at /accounts/signup/
+# Error: ConnectionRefusedError at /accounts/signup/
 ACCOUNT_EMAIL_VERIFICATION = 'none' # Disables email verification
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
+SOCIALACCOUNT_FORMS = {'disconnect': 'users.forms.CustomSocialDisconnectForm'}
+
+
 # ACCOUNT_ADAPTER = 'users.adapter.NoNewUsersAccountAdapter'
-
 # ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-
-# ACCOUNT_FORMS = {
-#     'signup': 'users.forms.CustomSignupForm',
-# }
-
+# ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignupForm'}
 # ACCOUNT_SIGNUP_FORM_CLASS = 'UsersConfig.forms.CustomSignupForm'
+

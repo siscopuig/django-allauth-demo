@@ -1,0 +1,15 @@
+
+
+- I need to remove password form on "/users/profile"
+    On class CustomUserChangeForm, extend from forms.ModelForm instead of UserChangeForm
+
+- How to get first_name and last_name from the provider (github)
+    view.py
+        context = {"extra_data": SocialAccount.objects.values('extra_data')}
+
+    template.html
+        {% for item in extra_data %}
+            <p>value: {{ item.extra_data.name }}</p>
+        {% endfor %}
+
+- Create a profile automatically when user sign up to a social account.
