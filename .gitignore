@@ -5,8 +5,11 @@
 __pycache__
 
 # Optional #
-# db.sqlite3
-# media
+db.sqlite3
+
+# Resources
+doc
+lab
 
 # Backup files #
 *.bak
