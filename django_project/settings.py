@@ -124,7 +124,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# Failed ----->Error while running '$ python manage.py collectstatic --noinput'.
+STATIC_FILES = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = '/static/'
+
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -157,6 +162,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'none' # Disables email verification
 AUTH_USER_MODEL = 'users.CustomUser'
 
 SOCIALACCOUNT_FORMS = {'disconnect': 'users.forms.CustomSocialDisconnectForm'}
+
+
 
 
 # ACCOUNT_ADAPTER = 'users.adapter.NoNewUsersAccountAdapter'
