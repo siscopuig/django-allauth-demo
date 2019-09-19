@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Profile
-from .forms import CustomUserProfile, CustomUserChangeForm
-
+from .models import UserProfile
+from .forms import CustomUserChangeForm
+from .forms import CustomUserProfile
+from .models import UserProfile
 
 
 @login_required()
 def profile(request):
 
-    user_profile = Profile.objects.get(pk=request.user.id)
+    user_profile = UserProfile.objects.get(pk=request.user.id)
 
     if request.method == 'POST':
         update_form = CustomUserChangeForm(request.POST, instance=request.user)

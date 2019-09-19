@@ -10,6 +10,7 @@ db.sqlite3
 # Resources
 doc
 lab
+lab/tests/*
 
 # Backup files #
 *.bak

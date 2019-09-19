@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -146,8 +145,11 @@ AUTHENTICATION_BACKENDS = (
 
 
 SITE_ID = 1
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 # Error: ConnectionRefusedError at /accounts/signup/
 ACCOUNT_EMAIL_VERIFICATION = 'none' # Disables email verification

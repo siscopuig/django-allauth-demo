@@ -1,8 +1,8 @@
 from django.dispatch import receiver
 from allauth.account.signals import user_logged_in
 from django.db.models.signals import post_save
-from .models import Profile
 from .models import CustomUser
+from .models import UserProfile
 from django.conf import settings
 import requests
 import shutil
@@ -12,10 +12,10 @@ import os
 @receiver(signal=post_save, sender=CustomUser)
 def create_profile(sender, instance, created, **kwargs):
     """
-    Creates a user profile when custom user model is created.
+    Creates a Profile object when CustomUser object is created.
     """
     if created:
-        Profile.objects.create(user=instance)
+        UserProfile.objects.create(user=instance)
 
 
 @receiver(signal=post_save, sender=CustomUser)
@@ -33,9 +33,10 @@ def user_looged_in_(request, user, sociallogin=None, **kwargs):
     sociallogin param, giving access to metadata on social remote account.
     """
 
+
     try:
-        user_profile = Profile.objects.get(pk=request.user.id)
-    except Profile.DoesNotExist:
+        user_profile = UserProfile.objects.get(pk=request.user.id)
+    except UserProfile.DoesNotExist:
         user_profile = None
 
     if sociallogin.account.provider == 'github':

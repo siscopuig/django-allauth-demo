@@ -1,12 +1,29 @@
 from django.db import models
+from .manager import CustomUserManager
 from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-    pass
+    """
+    Creates a CustomUser object by keeping the properties of the AbstractUser.
+    - Removes username field.
+    - Field email become required & unique.
+    - Sets USERNAME_FIELD to unique identifier for the User model
+    """
+    username = None
+    email = models.EmailField('email address', unique=True)
+
+    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
 
 
-class Profile(models.Model):
+class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, related_name='profile', on_delete=models.CASCADE)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone_number = models.CharField(max_length=50, blank=True, null=True)
@@ -18,5 +35,5 @@ class Profile(models.Model):
 
 
     def __str__(self):
-        return f"{self.user.username} Profile"
+        return f"{self.user.email} Profile"
 
