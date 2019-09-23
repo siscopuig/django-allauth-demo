@@ -27,7 +27,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, related_name='profile', on_delete=models.CASCADE)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone_number = models.CharField(max_length=50, blank=True, null=True)
-    image = models.ImageField(default='images/default.jpg', null=True)
+    image = models.ImageField(default='images/default/default.jpg', null=True)
 
 
     def save(self, **kwargs):
