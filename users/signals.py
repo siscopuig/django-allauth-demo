@@ -33,18 +33,18 @@ def user_looged_in_(request, user, sociallogin=None, **kwargs):
     sociallogin param, giving access to metadata on social remote account.
     """
 
-
     try:
         user_profile = UserProfile.objects.get(pk=request.user.id)
     except UserProfile.DoesNotExist:
         user_profile = None
 
-    if sociallogin.account.provider == 'github':
-        username = sociallogin.account.extra_data['login']
-        id = sociallogin.account.extra_data['id']
-        avatar_url = sociallogin.account.extra_data['avatar_url']
-        user_profile.image = f"images/{username}_{id}.jpg"
-        process_social_profile_image(user_profile.image, avatar_url)
+    if sociallogin:
+        if sociallogin.account.provider == 'github':
+            username = sociallogin.account.extra_data['login']
+            id = sociallogin.account.extra_data['id']
+            avatar_url = sociallogin.account.extra_data['avatar_url']
+            user_profile.image = f"images/{username}_{id}.jpg"
+            process_social_profile_image(user_profile.image, avatar_url)
 
     user_profile.save()
 

@@ -2,6 +2,7 @@ from django import forms
 from users.models import Profile
 from allauth.account.forms import SignupForm
 
+
 class CustomSignupForm(forms.ModelForm):
 
     first_name = forms.CharField(max_length=30, label='First Name')

@@ -1,37 +1,33 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
     <div class="content-section">
-        <div class="media">
+        <h2>Profile</h2>
             {% if user.profile.image.url %}
                 <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="image">
             {% else %}
                 <img class="rounded-circle account-img" src="{{ user.profile.default.url }}" alt="image">
             {% endif %}
-        </div>
         <div class="media-body">
             <p class="text-secondary">{{ user.email }}</p>
         </div>
-    </div>
 
-    <form method="post">
-      {% csrf_token %}
-        <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Profile Info</legend>
+        <form method="post">
+        {% csrf_token %}
+            <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Profile Info</legend>
             {{ update_form|crispy }}
             {{ profile_form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info">Update</button>
-        </div>
-    </form>
-
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info">Update</button>
+            </div>
+        </form>
+    </div>
 
 {% endblock content %}
 
 {% block right %}
-
     <div class="col-md-4">
         <div class="content-section">
             <h5>account settings</h5>
@@ -41,5 +37,4 @@
             </ul>
         </div>
     </div>
-
 {% endblock right %}
