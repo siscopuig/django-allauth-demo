@@ -20,6 +20,7 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
+        """A string representation of the model."""
         return self.email
 
 
@@ -35,5 +36,6 @@ class UserProfile(models.Model):
 
 
     def __str__(self):
+        """A string representation of the model."""
         return f"{self.user.email} Profile"
 

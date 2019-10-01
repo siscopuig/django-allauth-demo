@@ -11,6 +11,7 @@ db.sqlite3
 doc
 lab/*
 lab/tests/*
+users/tests
 
 # Backup files #
 *.bak
