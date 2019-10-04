@@ -148,7 +148,6 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-
 SITE_ID = 1
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
@@ -165,9 +164,4 @@ SOCIALACCOUNT_FORMS = {'disconnect': 'users.forms.CustomSocialDisconnectForm'}
 
 django_heroku.settings(locals())
 
-
-# ACCOUNT_ADAPTER = 'users.adapter.NoNewUsersAccountAdapter'
-# ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-# ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignupForm'}
-# ACCOUNT_SIGNUP_FORM_CLASS = 'UsersConfig.forms.CustomSignupForm'
 
