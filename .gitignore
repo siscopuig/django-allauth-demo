@@ -9,9 +9,7 @@ db.sqlite3
 
 # Resources
 doc
-lab/*
-lab/tests/*
-users/tests
+lab
 
 # Backup files #
 *.bak
