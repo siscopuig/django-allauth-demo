@@ -21,7 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'k9qw@%hr9b3xjrwhldu!n$^ah9_9ukuhasw$hj_*-8g(cvfx35'
+# SECRET_KEY = 'k9qw@%hr9b3xjrwhldu!n$^ah9_9ukuhasw$hj_*-8g(cvfx35'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -159,8 +160,6 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none' # Disables email verification
 
 AUTH_USER_MODEL = 'users.CustomUser'
-
-SOCIALACCOUNT_FORMS = {'disconnect': 'users.forms.CustomSocialDisconnectForm'}
 
 django_heroku.settings(locals())
 
