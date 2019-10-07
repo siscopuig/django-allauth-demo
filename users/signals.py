@@ -1,8 +1,7 @@
 from django.dispatch import receiver
 from allauth.account.signals import user_logged_in
 from django.db.models.signals import post_save
-from .models import CustomUser
-from .models import UserProfile
+from .models import CustomUser, UserProfile
 from django.conf import settings
 import requests
 import shutil

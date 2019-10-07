@@ -6,7 +6,9 @@ import os
 
 
 class FunctionalTestProject(LiveServerTestCase):
-
+    """
+    Test social account login process locally.
+    """
 
     def setUp(self):
         self.driver = webdriver.Chrome('/usr/local/bin/chromedriver')
@@ -32,7 +34,7 @@ class FunctionalTestProject(LiveServerTestCase):
 
             self.driver.find_element_by_xpath('//*[@id="login_field"]')\
                 .send_keys(os.getenv('GITHUB_EMAIL'))
-
+            
             self.driver.find_element_by_xpath('//*[@id="password"]')\
                 .send_keys(os.getenv('GITHUB_PASS'))
 
@@ -46,6 +48,8 @@ class FunctionalTestProject(LiveServerTestCase):
         if current_url == 'https://github.com/login/oauth/authorize':
             self.driver.find_element_by_xpath(
                 '//*[@id="js-oauth-authorize-btn"]').click()
+        elif current_url == 'https://github.com/sessions/verified-device':
+            self.fail('A verification code has been sent your github email account')
 
         # Test if authorisation redirects to home
         self.assertEquals('http://127.0.0.1:8000/', self.driver.current_url)

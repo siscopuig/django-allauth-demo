@@ -10,14 +10,14 @@ class CustomUser(AbstractUser):
     - Field email become required & unique.
     - Sets USERNAME_FIELD to unique identifier for the User model
     """
+    
     username = None
     email = models.EmailField('email address', unique=True)
-
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
-
     objects = CustomUserManager()
+
 
     def __str__(self):
         """A string representation of the model."""
@@ -25,6 +25,8 @@ class CustomUser(AbstractUser):
 
 
 class UserProfile(models.Model):
+    """ User profile model """
+    
     user = models.OneToOneField(CustomUser, related_name='profile', on_delete=models.CASCADE)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone_number = models.CharField(max_length=50, blank=True, null=True)

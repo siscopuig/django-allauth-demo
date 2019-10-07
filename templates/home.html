@@ -1,25 +1,12 @@
 
 {% extends 'base.html' %}
 {% block content %}
-
     <div class="content-section">
-
         <h2>Homepage</h2>
-
         {% if user.is_authenticated %}
             <p>Welcome, {{ user.email }}</p>
         {% else %}
             <p>I dont know who you are!</p>
         {% endif %}
     </div>
-
-
 {% endblock content %}
-
-{#{% if user.is_authenticated %}#}
-{#    <p>Hi {{ user.username }}#}
-{#    <p><a href="{% url 'logout' %}">Log out</a></p>#}
-{#{% else %}#}
-{#    <p><a href="{% url 'signup' %}">Sign Up</a></p>#}
-{#    <p><a href="{% url 'login' %}">Log In </a></p>#}
-{#{% endif %}#}

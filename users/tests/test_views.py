@@ -1,10 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
-from users.models import CustomUser, UserProfile
-from django.contrib.auth.decorators import login_required
+from users.models import CustomUser
 
-# Run this test on terminal
-# python manage.py test users.tests.test_views
+# To run this test on terminal
+# $ python manage.py test users.tests.test_views
 
 class TestViews(TestCase):
 
@@ -29,9 +28,7 @@ class TestViews(TestCase):
         self.user1 = CustomUser.objects.create_user('user1@example.com', 'user1password', is_active=True)
         self.user1.set_password('user1password')
         self.user1.save()
-
         self.client.login(username='user1@example.com', password='user1password')
-
         resp = self.client.get(reverse('profile'))
         self.assertEquals(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'profile.html')
@@ -41,8 +38,6 @@ class TestViews(TestCase):
         self.user1 = CustomUser.objects.create_user('user1@example.com', 'user1password', is_active=True)
         self.user1.set_password('user1password')
         self.user1.save()
-
         self.client.login(username='user1@example.com', password='user1password')
-
         resp = self.client.get(reverse('delete'))
         self.assertRedirects(resp, '/users/signup/', status_code=302, target_status_code=200, fetch_redirect_response=True)
