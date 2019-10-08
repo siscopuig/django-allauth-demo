@@ -12,17 +12,14 @@ class TestViews(TestCase):
         self.assertEquals(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'signup.html')
 
-
     def test_login_render_template(self):
         resp = self.client.get('/accounts/login/')
         self.assertEquals(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'account/login.html')
 
-
     def test_logout_redirect_to_home(self):
         resp = self.client.get('/accounts/logout/')
         self.assertRedirects(resp, '/', status_code=302, target_status_code=200, fetch_redirect_response=True)
-
 
     def test_profile_render_template(self):
         self.user1 = CustomUser.objects.create_user('user1@example.com', 'user1password', is_active=True)
@@ -32,7 +29,6 @@ class TestViews(TestCase):
         resp = self.client.get(reverse('profile'))
         self.assertEquals(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'profile.html')
-
 
     def test_delete_redirect_to_signup(self):
         self.user1 = CustomUser.objects.create_user('user1@example.com', 'user1password', is_active=True)

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
     <div class="content-section">
         <form method="POST" action="/accounts/github/login/?process=login" class="mb-5">
             {% csrf_token %}
@@ -12,7 +11,6 @@
                 <button type="submit" class="btn btn-outline-info">Github</button>
             </div>
         </form>
-
         <form method="POST" class="mb-5">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -23,12 +21,10 @@
                 <button type="submit" class="btn btn-outline-info">Login</button>
             </div>
         </form>
-
         <div class="border-top pt-3">
             <small class="text-muted">Need An Account?
                     <a class="ml-2" href="{% url 'signup' %}">Sign Up Now</a>
             </small>
         </div>
     </div>
-
 {% endblock content %}

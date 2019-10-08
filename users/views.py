@@ -10,18 +10,14 @@ def signup(request):
     
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
-
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get('email')
             messages.success(request, f"Account created for {email}.")
             return redirect('home')
-
     else:
         form = CustomUserCreationForm()
-
     return render(request, 'signup.html', context={'form': form})
-
 
 
 @login_required()
@@ -29,27 +25,20 @@ def profile(request):
     """ Profile view display's  """
 
     user_profile = UserProfile.objects.get(pk=request.user.id)
-
     if request.method == 'POST':
         update_form = CustomUserChangeForm(request.POST, instance=request.user)
         profile_form = CustomUserProfile(request.POST, instance=user_profile)
-
         if update_form.is_valid() and profile_form.is_valid():
             update_form.save()
             profile_form.save()
             messages.success(request, f"Your account has been updated")
             return redirect('profile')
-
     else:
         update_form = CustomUserChangeForm(instance=request.user)
         profile_form = CustomUserProfile(instance=user_profile)
-
-    context = {
-        'update_form': update_form,
-        'profile_form': profile_form
-    }
-
-    return render(request, 'profile.html', context=context)
+        
+    return render(request, 'profile.html', 
+                  context={'update_form': update_form, 'profile_form': profile_form})
 
 
 @login_required()

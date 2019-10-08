@@ -3,18 +3,15 @@ from users.models import CustomUser, UserProfile
 from django.contrib.auth import get_user_model
 
 
-class UserModelTest(TestCase):
-
+class TestUserModel(TestCase):
 
     def test_create_customuser(self):
         self.user1 = CustomUser.objects.create_user('user1@example.com', 'user1password', is_active=True)
         self.assertEquals(self.user1.email, 'user1@example.com')
-
-
+        
     def test_create_user_profile(self):
         self.user1 = CustomUser.objects.create_user('user1@example.com', 'user1password', is_active=True)
         self.assertEquals(UserProfile.objects.count(), 1)
-
 
     def test_update_user_profile(self):
         self.user1 = CustomUser.objects.create_user('user1@example.com', 'user1password', is_active=True)
